@@ -16,7 +16,7 @@ public class Amigos {
 
 			String[] entradas = entrada.split("(\\\\n|\\r?\\n)");
 
-			for (int i = 0; i < entradas.length; i++) {
+			for (short i = 0; i < entradas.length; i++) {
 				System.out.println(doit(entradas[i]));
 				pilhaOperadores.clear();
 				pilhaGrupos.clear();
@@ -24,19 +24,19 @@ public class Amigos {
 		}
 	}
 
-	public static String doit(String input) {
+	public static final String doit(String input) {
 		input = input.replaceAll("\\{\\}", " ").replaceAll("\\{", "").replaceAll("\\{", "").replaceAll("\\}", "");
 		input = new StringBuilder(input).reverse().toString().replaceAll("\\(", "2").replaceAll("\\)", "(").replaceAll("2", "\\)");
 		String[] operadores = input.split("\\s*[a-zA-Z\\(\\)]*");
 		String[] conjuntos = input.split("[^a-zA-Z\\ \\(\\)]");
 
-		for (int i = 0; i < operadores.length; i++) {
+		for (short i = 0; i < operadores.length; i++) {
 			if (!operadores[i].equals("")) {
 				pilhaOperadores.push(operadores[i]);
 			}
 		}
 
-		for (int i = 0; i < conjuntos.length; i++) {
+		for (short i = 0; i < conjuntos.length; i++) {
 			String conjunto = conjuntos[i].trim();
 			while (true) {
 				if (conjunto.contains("(")) {
@@ -62,8 +62,8 @@ public class Amigos {
 		String processaTudo = processaBloco();
 
 		char[] charArray = processaTudo.toCharArray();
-		for (int i = 0; i < charArray.length - 1; i++) {
-			for (int j = 0; j < charArray.length - 1; j++) {
+		for (short i = 0; i < charArray.length - 1; i++) {
+			for (short j = 0; j < charArray.length - 1; j++) {
 				if (charArray[j] > charArray[j + 1]) {
 					char aux = charArray[j];
 					charArray[j] = charArray[j + 1];
@@ -75,7 +75,7 @@ public class Amigos {
 		return ("{" + String.valueOf(charArray) + "}").replaceAll("\\ ", "");
 	}
 
-	private static String processaBloco() {
+	private static final String processaBloco() {
 		label: while (true) {
 			if (pilhaGrupos.size() == 1) {
 				break;
@@ -143,7 +143,7 @@ public class Amigos {
 		return (String) pilhaGrupos.pop();
 	}
 
-	private static String resolverOperacao(String primeiroConjunto, String operador, String segundoConjunto) {
+	private static final String resolverOperacao(String primeiroConjunto, String operador, String segundoConjunto) {
 		if ("+".equals(operador)) {
 			return somar(primeiroConjunto.toCharArray(), segundoConjunto.toCharArray());
 		} else if ("-".equals(operador)) {
@@ -156,9 +156,9 @@ public class Amigos {
 	private static String somar(char[] conjunto1, char[] conjunto2) {
 		String nova = String.valueOf(conjunto1);
 
-		for (int j = 0; j < conjunto2.length; j++) {
+		for (short j = 0; j < conjunto2.length; j++) {
 			boolean jaPossui = false;
-			for (int i = 0; i < conjunto1.length; i++) {
+			for (short i = 0; i < conjunto1.length; i++) {
 				if (conjunto1[i] == conjunto2[j]) {
 					jaPossui = true;
 					break;
@@ -173,11 +173,11 @@ public class Amigos {
 		return nova;
 	}
 
-	private static String subtrair(char[] conjunto1, char[] conjunto2) {
+	private static final String subtrair(char[] conjunto1, char[] conjunto2) {
 		String nova = "";
-		for (int i = 0; i < conjunto1.length; i++) {
+		for (short i = 0; i < conjunto1.length; i++) {
 			boolean isPermanece = true;
-			for (int j = 0; j < conjunto2.length; j++) {
+			for (short j = 0; j < conjunto2.length; j++) {
 				if (conjunto1[i] == conjunto2[j]) {
 					isPermanece = false;
 					break;
@@ -191,10 +191,10 @@ public class Amigos {
 		return nova;
 	}
 
-	private static String interseccao(char[] conjunto1, char[] conjunto2) {
+	private static final String interseccao(char[] conjunto1, char[] conjunto2) {
 		String nova = "";
-		for (int i = 0; i < conjunto1.length; i++) {
-			for (int j = 0; j < conjunto2.length; j++) {
+		for (short i = 0; i < conjunto1.length; i++) {
+			for (short j = 0; j < conjunto2.length; j++) {
 				if (conjunto1[i] == conjunto2[j]) {
 					nova += conjunto1[i];
 					break;
